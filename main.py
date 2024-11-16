@@ -1,7 +1,7 @@
 import tkinter as tk
 from window import win_to_center
 from tkinter import messagebox
-
+import os
 
 # Функція для входу
 def login():
@@ -13,15 +13,6 @@ def login():
     else:
         messagebox.showerror("Помилка", "Неправильне ім'я користувача або пароль.")
 
-def register():
-    register_window = tk.Toplevel(root)
-    register_window.title("Реєстрація")
-    register_window.geometry("300x200")
-    tk.Label(register_window, text="Ім'я користувача:").grid(row=0, column=0, padx=10, pady=5)
-    tk.Entry(register_window).grid(row=0, column=1, padx=10, pady=5)
-    tk.Label(register_window, text="Пароль:").grid(row=1, column=0, padx=10, pady=5)
-    tk.Entry(register_window, show="*").grid(row=1, column=1, padx=10, pady=5)
-    tk.Button(register_window, text="Зареєструватися", command=lambda: messagebox.showinfo("Реєстрація", "Успішно!")).grid(row=2, column=0, columnspan=2, pady=10)
 
 # Головне вікно
 root = tk.Tk()
