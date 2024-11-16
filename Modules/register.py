@@ -1,4 +1,4 @@
-import tkinter as tk
+'''import tkinter as tk
 from myLib.window import *
 from tkinter import messagebox
 import os
@@ -38,3 +38,4 @@ def create_register_window():
 
     return_button = tk.Button(register_window, text="Назад", command=return_to_login)
     return_button.grid(row=3, column=1, pady=10)
+'''
