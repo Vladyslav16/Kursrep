@@ -1,7 +1,8 @@
 import tkinter as tk
-from window import win_to_center
+from myLib.window import *
 from tkinter import messagebox
 import os
+
 
 # Функція для входу
 def login():
