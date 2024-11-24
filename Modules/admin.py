@@ -3,14 +3,7 @@ from myLib.window import *
 from tkinter import messagebox
 import os
 
-# Функція для повернення до авторизації
-def return_to_login():
-    register_window.destroy()  # Закриває поточне вікно
-    os.system("python login.py")  # Запускає головне вікно
 
-# Головне вікно реєстрації
-def create_register_window():
-    global register_window
 
     register_window = tk.Tk()
     register_window.title("Реєстрація")

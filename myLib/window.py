@@ -1,8 +1,24 @@
-Config = {
-  #'active background': "light gray",
-  'font': ("Times New Roman", 12),
-  #'bg': "white",
-  #'fg': "black"
+# Конфігурації для різних елементів GUI
+ButtonConfig = {
+    'font': ("Times New Roman", 14, "bold"),
+    'bg': "lightblue",
+    'fg': "black",
+    'activebackground': "blue",
+    'activeforeground': "white",
+}
+
+EntryConfig = {
+    'font': ("Arial", 12),
+    'bg': "white",
+    'fg': "black",
+    'highlightbackground': "gray",
+    'highlightthickness': 1,
+}
+
+LabelConfig = {
+    'font': ("Verdana", 12),
+    'bg': "lightgray",
+    'fg': "black",
 }
 
 
