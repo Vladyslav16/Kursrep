@@ -4,19 +4,40 @@ from tkinter import messagebox
 import os
 
 
+# Функція для зчитування даних з файлу
+def read_credentials(file_path):
+    credentials = {}
+    if os.path.exists(file_path):
+        with open(file_path, "r", encoding="utf-8") as file:
+            for line in file:
+                username, password = line.strip().split(":")
+                credentials[username] = password
+    else:
+        messagebox.showerror("Помилка", f"Файл {file_path} не знайдено!")
+    return credentials
+
+
 # Функція авторизації
 def login():
     username = username_entry.get()
     password = password_entry.get()
 
-    if username == "admin" and password == "admin":
-        messagebox.showinfo("Успіх", "Успішний вхід!")
+    # Шлях до файлів
+    admin_file = "data/admin.txt"
+    user_file = "data/nameuser.txt"
+
+    # Зчитуємо дані з файлів
+    admin_credentials = read_credentials(admin_file)
+    user_credentials = read_credentials(user_file)
+
+    if username in admin_credentials and admin_credentials[username] == password:
+        #open_admin_window()  # Відкриваємо вікно адміністратора
+        messagebox.showinfo("Успіх", "Адміністратор")
+    elif username in user_credentials and user_credentials[username] == password:
+        #open_user_window()  # Відкриваємо вікно користувача
+        messagebox.showinfo("Успіх", "Користувач")
     else:
         messagebox.showerror("Помилка", "Неправильне ім'я користувача або пароль.")
-
-
-def register():
-    messagebox.showinfo("Реєстрація", "Тут має бути реєстрація")
 
 
 # Головне вікно
