@@ -31,11 +31,11 @@ def login():
     user_credentials = read_credentials(user_file)
 
     if username in admin_credentials and admin_credentials[username] == password:
-        #open_admin_window()  # Відкриваємо вікно адміністратора
         messagebox.showinfo("Успіх", "Адміністратор")
+        # open_admin_window()  # Відкриваємо вікно адміністратора
     elif username in user_credentials and user_credentials[username] == password:
-        #open_user_window()  # Відкриваємо вікно користувача
         messagebox.showinfo("Успіх", "Користувач")
+        #open_user_window()  # Відкриваємо вікно користувача
     else:
         messagebox.showerror("Помилка", "Неправильне ім'я користувача або пароль.")
 
@@ -73,4 +73,5 @@ login_button = tk.Button(root, text="Увійти", **ButtonConfig, command=logi
 login_button.grid(row=3, column=0, columnspan=2, pady=10)
 
 # Запуск програми
-root.mainloop()
+if __name__ == "__main__":
+    root.mainloop()

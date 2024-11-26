@@ -59,3 +59,11 @@ def return_to_previous(current_window, previous_window_func):
     current_window.destroy()
     previous_window_func()
 
+
+def switch_window(self, window):
+    for widget in self.winfo_children():
+        widget.destroy()
+    new_window = window(self)
+    new_window.pack()
+
+
