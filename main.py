@@ -24,6 +24,16 @@ class AuthorizeWindow(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
 
+        # Центрування вмісту за допомогою grid
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(2, weight=1)
+        self.grid_rowconfigure(3, weight=1)
+        self.grid_rowconfigure(4, weight=1)
+        self.grid_rowconfigure(5, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+
         tk.Label(self, text="Авторизація:", **LabelConfig).grid(row=0, column=0, columnspan=2, padx=10, pady=5)
 
         # Поля вводу
@@ -60,25 +70,18 @@ class AuthorizeWindow(tk.Frame):
         else:
             messagebox.showerror("Помилка", "Неправильне ім'я користувача або пароль.")
 
-# Центрування вмісту за допомогою grid
-root.grid_rowconfigure(0, weight=1)
-root.grid_rowconfigure(1, weight=1)
-root.grid_rowconfigure(2, weight=1)
-root.grid_rowconfigure(3, weight=1)
-root.grid_rowconfigure(4, weight=1)
-root.grid_rowconfigure(5, weight=1)
-root.grid_columnconfigure(0, weight=1)
-root.grid_columnconfigure(1, weight=1)
 
 # Запуск програми
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("Система ідентифікації користувачів")
     win_to_center(root, 660, 330)
-
+    # Налаштування головного контейнера
+    root.grid_rowconfigure(0, weight=1)
+    root.grid_columnconfigure(0, weight=1)
     # Запуск головного екрану
     main_screen = AuthorizeWindow(root)
-    #main_screen.pack(fill="both", expand=True)
+    main_screen.grid(row=0, column=0, sticky="nsew")
 
     root.mainloop()
 
