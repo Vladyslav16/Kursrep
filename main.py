@@ -2,6 +2,8 @@ import tkinter as tk
 from myLib.window import *
 from tkinter import messagebox
 import os
+from Modules.admin import Admin
+from Modules.user import User
 
 
 # Функція для зчитування даних з файлу
@@ -31,11 +33,11 @@ def login():
     user_credentials = read_credentials(user_file)
 
     if username in admin_credentials and admin_credentials[username] == password:
-        messagebox.showinfo("Успіх", "Адміністратор")
-        # open_admin_window()  # Відкриваємо вікно адміністратора
+        messagebox.showinfo("Успіх", "Авторизований, як Адміністратор")
+        switch_window(root, Admin)  # Відкриваємо вікно адміністратора
     elif username in user_credentials and user_credentials[username] == password:
-        messagebox.showinfo("Успіх", "Користувач")
-        #open_user_window()  # Відкриваємо вікно користувача
+        messagebox.showinfo("Успіх", "Авторизований, як Користувач")
+        switch_window(root, User)  # Відкриваємо вікно користувача
     else:
         messagebox.showerror("Помилка", "Неправильне ім'я користувача або пароль.")
 

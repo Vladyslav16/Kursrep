@@ -52,18 +52,14 @@ def win_to_center(parent, window_width, window_height):
     parent.resizable(False, False)
 
 
-def return_to_previous(current_window, previous_window_func):
+def switch_window(current_window, next_window):
     """
-    Закриває поточне вікно та відкриває попереднє.
+    Метод для перемикання вікон.
     """
-    current_window.destroy()
-    previous_window_func()
-
-
-def switch_window(self, window):
-    for widget in self.winfo_children():
+    for widget in current_window():
         widget.destroy()
-    new_window = window(self)
-    new_window.pack()
+
+    return next_window
+
 
 
