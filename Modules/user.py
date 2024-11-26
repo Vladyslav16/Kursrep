@@ -16,4 +16,4 @@ class User(tk.Frame):
 
 
     def open_previous_window(self):
-        return switch_window(Admin)
+        pass
