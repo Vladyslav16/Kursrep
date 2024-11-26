@@ -50,16 +50,21 @@ def win_to_center(parent, window_width, window_height):
     y = (parent.winfo_screenheight() - window_height) // 2 - 20
     parent.geometry(f"{window_width}x{window_height}+{x}+{y}")
     parent.resizable(False, False)
+    parent.wm_attributes("-topmost", 1)
 
 
 def switch_window(current_window, next_window):
     """
-    Функція для перемикання вікон.
+    Функція для перемикання між вікнами.(Як же важко було до цього додуматись, затрачено 8 годин)
     """
-    for widget in current_window():
+    # Очищення всіх елементів з поточного контейнера
+    for widget in current_window.winfo_children():
         widget.destroy()
 
-    return next_window
+    # Ініціалізація нового вікна
+    next_window = next_window(current_window)
+    next_window.grid(row=0, column=0, sticky="nsew")
+
 
 
 
