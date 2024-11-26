@@ -22,16 +22,16 @@ class Admin(tk.Frame):
         tk.Label(self, text="Вікно адміна:", **LabelConfig).grid(row=0, column=0, columnspan=2, padx=10, pady=5)
 
         # Кнопки адмінського вікна
-        button_register = tk.Button(self, text="Зареєструвати", **ButtonConfig)
-        button_register.grid(row=1, column=0, columnspan=2, padx=10, pady=5)
+        button_resource = tk.Button(self, text="Відкрити Ресурс", **ButtonConfig)
+        button_resource.grid(row=1, column=0, columnspan=2, padx=10, pady=5)
 
-        button_resource = tk.Button(self, text="Ресурс", **ButtonConfig)
-        button_resource.grid(row=2, column=0, columnspan=2, padx=10, pady=5)
+        button_register = tk.Button(self, text="Зареєструвати Нового Користувача", **ButtonConfig)
+        button_register.grid(row=2, column=0, columnspan=2, padx=10, pady=5)
 
-        button_log = tk.Button(self, text="Переглянути журнал дій", **ButtonConfig)
+        button_log = tk.Button(self, text="Переглянути Журнал Подій", **ButtonConfig)
         button_log.grid(row=3, column=0, columnspan=2, padx=10, pady=5)
 
-        button_users = tk.Button(self, text="Користувачі", **ButtonConfig)
+        button_users = tk.Button(self, text="Усі Користувачі", **ButtonConfig)
         button_users.grid(row=4, column=0, columnspan=2, padx=10, pady=5)
 
         # Кнопка для повернення

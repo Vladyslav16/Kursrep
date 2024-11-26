@@ -55,7 +55,7 @@ def win_to_center(parent, window_width, window_height):
 
 def switch_window(current_window, next_window):
     """
-    Функція для перемикання між вікнами.(Як же важко було до цього додуматись, затрачено 8 годин)
+    Функція для перемикання між вікнами.()
     """
     # Очищення всіх елементів з поточного контейнера
     for widget in current_window.winfo_children():
