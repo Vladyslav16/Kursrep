@@ -1,4 +1,3 @@
-import tkinter as tk
 ### !Конфігурації для різних елементів GUI! ###
 MenuConfig = {
     'font': ("Times New Roman", 12, "bold"),
