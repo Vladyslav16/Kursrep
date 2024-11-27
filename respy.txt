@@ -1,0 +1,127 @@
+import tkinter as tk
+from tkinter import messagebox
+import random
+
+# Алгоритм Ель-Гамаля
+class ElGamal:
+    def __init__(self, p=None, g=None, x=None):
+        if not p:
+            self.p = self.generate_large_prime()
+        else:
+            self.p = p
+
+        if not g:
+            self.g = random.randint(2, self.p - 1)
+        else:
+            self.g = g
+
+        if not x:
+            self.x = random.randint(1, self.p - 2)
+        else:
+            self.x = x
+
+        self.y = pow(self.g, self.x, self.p)
+
+    def generate_large_prime(self):
+        while True:
+            num = random.randint(2 ** 10, 2 ** 11)
+            if self.is_prime(num):
+                return num
+
+    def is_prime(self, n):
+        if n < 2:
+            return False
+        for i in range(2, int(n ** 0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+
+    def encrypt(self, text):
+        encrypted = []
+        k = random.randint(1, self.p - 2)
+        a = pow(self.g, k, self.p)
+        for char in text:
+            b = (ord(char) * pow(self.y, k, self.p)) % self.p
+            encrypted.append((a, b))
+        return encrypted
+
+    def decrypt(self, encrypted):
+        decrypted = ""
+        for a, b in encrypted:
+            s = pow(a, self.x, self.p)
+            s_inv = pow(s, -1, self.p)  # Модульне обернене
+            char = chr((b * s_inv) % self.p)
+            decrypted += char
+        return decrypted
+
+    def encrypt_to_str(self, text):
+        return ",".join([f"{a}:{b}" for a, b in self.encrypt(text)])
+
+    def decrypt_from_str(self, encrypted_str):
+        encrypted = [tuple(map(int, pair.split(":"))) for pair in encrypted_str.split(",")]
+        return self.decrypt(encrypted)
+
+# Глобальні змінні
+elgamal = ElGamal()
+user_level = "A"  # A, B, or C
+
+# Функції роботи з файлами
+def read_file(filename):
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            return file.read()
+    except FileNotFoundError:
+        return ""
+
+def write_file(filename, content):
+    with open(filename, "w", encoding="utf-8") as file:
+        file.write(content)
+
+# Функції для шифрування та дешифрування
+def encrypt_text(text):
+    return elgamal.encrypt_to_str(text)
+
+def decrypt_text(encrypted_text):
+    return elgamal.decrypt_from_str(encrypted_text)
+
+# Інтерфейс користувача
+def create_resource_window():
+    def save_text():
+        if user_level == "A":
+            text = text_area.get("1.0", tk.END).strip()
+            write_file("input.txt", text)
+            encrypted_text = encrypt_text(text)
+            write_file("close.txt", encrypted_text)
+            messagebox.showinfo("Збережено", "Текст успішно збережено!")
+        else:
+            messagebox.showerror("Помилка", "У вас немає прав для редагування!")
+
+    def load_text():
+        if user_level == "A":
+            text = read_file("input.txt")
+        elif user_level == "B":
+            encrypted_text = read_file("close.txt")
+            text = decrypt_text(encrypted_text)
+        elif user_level == "C":
+            text = read_file("close.txt")
+        else:
+            text = ""
+        text_area.delete("1.0", tk.END)
+        text_area.insert(tk.END, text)
+
+    window = tk.Tk()
+    window.title("Ресурс")
+
+    text_area = tk.Text(window, wrap=tk.WORD, width=50, height=20)
+    text_area.pack(pady=10)
+
+    load_button = tk.Button(window, text="Завантажити", command=load_text)
+    load_button.pack(side=tk.LEFT, padx=10, pady=10)
+
+    save_button = tk.Button(window, text="Зберегти", command=save_text)
+    save_button.pack(side=tk.RIGHT, padx=10, pady=10)
+
+    window.mainloop()
+
+# Запуск програми
+create_resource_window()

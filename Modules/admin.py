@@ -38,7 +38,7 @@ class Admin(tk.Frame):
         button_resource = tk.Button(self, text="Відкрити ресурс", **ButtonConfig)
         button_resource.grid(row=1, column=0, columnspan=2, padx=10, pady=5)
 
-        button_register = tk.Button(self, text="Зареєструвати нового користувача", **ButtonConfig)
+        button_register = tk.Button(self, text="Зареєструвати нового користувача", **ButtonConfig, command=self.registr)
         button_register.grid(row=2, column=0, columnspan=2, padx=10, pady=5)
 
         button_users = tk.Button(self, text="Список користувачів", **ButtonConfig)
@@ -69,8 +69,12 @@ class Admin(tk.Frame):
         self.master.config(menu=menu_bar)
 
     def open_previous_window(self):
-        from main import AuthorizeWindow
+        from authorize import AuthorizeWindow
         switch_window(self.master, AuthorizeWindow)
+
+    def registr(self):
+        from registr import Register
+        switch_window(self.master, Register)
 
 
 if __name__ == "__main__":
