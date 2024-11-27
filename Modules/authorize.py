@@ -63,7 +63,6 @@ class AuthorizeWindow(tk.Frame):
         """Створює меню для вікна."""
         menu_bar = tk.Menu(self.master)
         file_menu = tk.Menu(menu_bar, **MenuConfig)
-        file_menu_1 = tk.Menu(menu_bar, **MenuConfig)
 
         menu_bar.add_cascade(label="Settings", menu=file_menu)
         file_menu.add_command(label="Про програму", command=show_about)

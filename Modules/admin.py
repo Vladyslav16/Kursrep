@@ -69,11 +69,11 @@ class Admin(tk.Frame):
         self.master.config(menu=menu_bar)
 
     def open_previous_window(self):
-        from authorize import AuthorizeWindow
+        from main import AuthorizeWindow
         switch_window(self.master, AuthorizeWindow)
 
     def registr(self):
-        from registr import Register
+        from main import Register
         switch_window(self.master, Register)
 
 

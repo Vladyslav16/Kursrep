@@ -68,7 +68,7 @@ class Register(tk.Frame):
         file_menu_1 = tk.Menu(menu_bar, **MenuConfig)
 
         menu_bar.add_cascade(label="Settings", menu=file_menu)
-        file_menu.add_command(label="Про програму")
+        file_menu.add_command(label="Про програму", command=show_about)
         file_menu.add_separator()
         file_menu.add_command(label="Вийти", command=self.master.quit)
 
@@ -78,5 +78,4 @@ class Register(tk.Frame):
         self.master.config(menu=menu_bar)
 
     def open_previous_window(self):
-        from main import AuthorizeWindow
         switch_window(self.master, Admin)

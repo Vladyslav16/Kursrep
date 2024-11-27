@@ -1,6 +1,8 @@
 import tkinter as tk
 from myLib.window import *
 from Modules.authorize import AuthorizeWindow
+from Modules.registr import Register
+
 
 # Запуск програми
 if __name__ == "__main__":
