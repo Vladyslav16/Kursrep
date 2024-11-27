@@ -19,10 +19,20 @@ def read_credentials(file_path):
     return credentials
 
 
+def show_about():
+    """Виводить інформацію про програму."""
+    messagebox.showinfo("Про програму", "Ця програма створена для авторизації користувачів та надання їм прав доступу "
+                                        "для перегляду ресурсу.")
+
+
 # Клас вікна авторизації
 class AuthorizeWindow(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
+        self.master = master  # Зберігаємо посилання на кореневе вікно
+
+        # Меню
+        self.create_menu()
 
         # Розміщення вмісту за допомогою grid
         self.grid_rowconfigure(0, weight=1)
@@ -49,6 +59,19 @@ class AuthorizeWindow(tk.Frame):
         login_button = tk.Button(self, text="Увійти", **ButtonConfig, command=self.login)
         login_button.grid(row=3, column=0, columnspan=2, pady=10)
 
+    def create_menu(self):
+        """Створює меню для вікна."""
+        menu_bar = tk.Menu(self.master)
+        file_menu = tk.Menu(menu_bar, **MenuConfig)
+        file_menu_1 = tk.Menu(menu_bar, **MenuConfig)
+
+        menu_bar.add_cascade(label="Settings", menu=file_menu)
+        file_menu.add_command(label="Про програму", command=show_about)
+        file_menu.add_separator()
+        file_menu.add_command(label="Вийти", command=self.master.quit)
+
+        self.master.config(menu=menu_bar)
+
     def login(self):
         username = self.username_entry.get()
         password = self.password_entry.get()
@@ -69,3 +92,5 @@ class AuthorizeWindow(tk.Frame):
             switch_window(self.master, User)  # Відкриваємо вікно користувача
         else:
             messagebox.showerror("Помилка", "Неправильне ім'я користувача або пароль.")
+
+

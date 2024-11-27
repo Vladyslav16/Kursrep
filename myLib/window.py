@@ -1,4 +1,13 @@
+import tkinter as tk
 ### !Конфігурації для різних елементів GUI! ###
+MenuConfig = {
+    'font': ("Times New Roman", 12, "bold"),
+    'bg': "lightgray",
+    'fg': "black",
+    'activebackground': "darkgray",
+    'activeforeground': "white",
+    'tearoff': 0,  # Вимикає відокремлення меню
+}
 ButtonConfig = {
     'font': ("Times New Roman", 14, "bold"),
     'bg': "lightblue",
@@ -53,18 +62,14 @@ def win_to_center(parent, window_width, window_height):
     parent.wm_attributes("-topmost", 1)
 
 
-def switch_window(current_window, next_window):
+def switch_window(current_master, next_window):
     """
     Функція для перемикання між вікнами.()
     """
     # Очищення всіх елементів з поточного контейнера
-    for widget in current_window.winfo_children():
+    for widget in current_master.winfo_children():
         widget.destroy()
 
     # Ініціалізація нового вікна
-    next_window = next_window(current_window)
+    next_window = next_window(current_master)
     next_window.grid(row=0, column=0, sticky="nsew")
-
-
-
-
