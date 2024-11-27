@@ -1,20 +1,7 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 import os
-from myLib.window import win_to_center
-
-
-def remove_user_from_file(user):
-    """Видаляє користувача з відповідного файлу"""
-    # Читаємо рядки з файлу
-    with open(user["file"], "r", encoding="utf-8") as f:
-        lines = f.readlines()
-
-    # Перезаписуємо файл, без рядка з видаленим користувачем
-    with open(user["file"], "w", encoding="utf-8") as f:
-        for line in lines:
-            if line.strip().split(":", 1)[0] != user["username"]:
-                f.write(line)
+from myLib.window import *
 
 
 def load_users():
@@ -36,58 +23,87 @@ def load_users():
 
 
 # Клас створення списку
+def remove_user_from_file(user):
+    """Видаляє користувача з відповідного файлу"""
+    with open(user["file"], "r", encoding="utf-8") as f:
+        lines = f.readlines()
+
+    with open(user["file"], "w", encoding="utf-8") as f:
+        for line in lines:
+            if line.strip().split(":", 1)[0] != user["username"]:
+                f.write(line)
+
+
 class UserListWindow(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)
         self.tree = None
         self.title("Список користувачів")
-        win_to_center(self, 600, 400)
+        win_to_center(self, 760, 460)
 
         # Завантажуємо користувачів з файлів
         self.users = load_users()
 
         # Створюємо таблицю користувачів
-        self.create_user_list()
+        self.create_user_table()
 
         # Видалити користувача
         delete_button = tk.Button(self, text="Видалити", **ButtonConfig, command=self.delete_user)
         delete_button.pack(pady=10)
 
         # Закрити вікно
-        close_button = tk.Button(self, text="Закрити",**ButtonConfig, command=self.destroy)
+        close_button = tk.Button(self, text="Закрити", **ButtonConfig, command=self.destroy)
         close_button.pack(pady=10)
 
-    def create_user_list(self):
-        """Створюємо таблицю для завантаження користувачів"""
-        self.tree = tk.Listbox(self, width=80, height=15)
-        self.tree.pack(pady=10)
+    def create_user_table(self):
+        """Створюємо таблицю для відображення користувачів"""
+        columns = ("username", "password", "access_level")
+        self.tree = ttk.Treeview(self, columns=columns, show="headings", height=15)
+        self.tree.pack(fill=tk.BOTH, expand=True)
 
+        # Налаштовуємо заголовки колонок
+        self.tree.heading("username", text="Name")
+        self.tree.heading("password", text="Password")
+        self.tree.heading("access_level", text="Access")
+
+        # Встановлюємо розмір колонок
+        self.tree.column("username", width=200, anchor=tk.CENTER)
+        self.tree.column("password", width=200, anchor=tk.CENTER)
+        self.tree.column("access_level", width=100, anchor=tk.CENTER)
+
+        # Додаємо дані до таблиці
         for user in self.users:
-            display_text = f"{user['username']} | {user['password']} | {user['access_level']}"
-            self.tree.insert(tk.END, display_text)
+            self.tree.insert("", tk.END, values=(user["username"], user["password"], user["access_level"]))
 
     def delete_user(self):
         """Видаляє вибраного користувача"""
-        selected_index = self.tree.curselection()
-        if not selected_index:
+        selected_item = self.tree.selection()
+        if not selected_item:
             pass
 
-        selected_user = self.users[selected_index[0]]
+        # Отримуємо дані вибраного користувача
+        values = self.tree.item(selected_item, "values")
+        username_to_delete = values[0]
 
         # Підтвердження видалення
-        confirm = messagebox.askyesno("Підтвердження",
-                                      f"Ви дійсно хочете видалити користувача '{selected_user['username']}'?")
+        confirm = messagebox.askyesno(
+            "Підтвердження",
+            f"Ви дійсно хочете видалити користувача '{username_to_delete}'?"
+        )
         if confirm:
             # Видаляємо користувача зі списку
-            self.users.remove(selected_user)
+            selected_user = next((user for user in self.users if user["username"] == username_to_delete), None)
+            if selected_user:
+                self.users.remove(selected_user)
 
-            # Оновлюємо Listbox
-            self.tree.delete(selected_index[0])
+                # Видаляємо користувача з відповідного файлу
+                remove_user_from_file(selected_user)
 
-            # Видаляємо користувача з файлу
-            remove_user_from_file(selected_user)
+            # Оновлюємо таблицю
+            self.tree.delete(selected_item)
 
-            messagebox.showinfo("Успіх", f"Користувача '{selected_user['username']}' успішно видалено!")
+            # Повідомлення про успішне видалення
+            messagebox.showinfo("Успіх", f"Користувача '{username_to_delete}' успішно видалено!")
 
     def update_files(self):
         """Перезаписуємо файли"""
