@@ -1,6 +1,8 @@
 import tkinter as tk
 from myLib.window import *
 from tkinter import messagebox
+import os
+from Modules.open_resource import ResourceWindow
 
 
 def show_about():
@@ -9,8 +11,22 @@ def show_about():
                                         "для перегляду ресурсу.")
 
 
-def show_access():
-    pass
+def show_access(file_path):
+    """Відображає рівень доступу поточного користувача."""
+    messagebox.showinfo("Ваш доступ",  f"Рівень: '{check_access_level(file_path)}'")
+
+
+def check_access_level(file_path):
+    """Зчитує дані з файлу та повертає рівні доступу користувачів."""
+    your_level = {}
+    if os.path.exists(file_path):
+        with open(file_path, 'r', encoding="utf_8") as f:
+            for line in f:
+                username, _, access_level = line.strip().split(":", 2)
+                your_level[username] = _, access_level
+    else:
+        messagebox.showerror("Помилка", f"Файл {file_path} не знайдено!")
+    return your_level
 
 
 # Клас вікна користувача
@@ -18,6 +34,7 @@ class User(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
         self.master = master  # Зберігаємо посилання на кореневе вікно
+        self.credentials_file = "data/nameuser.txt"  # Шлях до файлу з даними користувачів
 
         # Меню
         self.create_menu()
@@ -35,7 +52,7 @@ class User(tk.Frame):
         tk.Label(self, text="Вікно користувача:", **LabelConfig).grid(row=0, column=0, columnspan=2, padx=10, pady=5)
 
         # Кнопки користувацького вікна
-        button_open_resource = tk.Button(self, text="Відкрити ресурс", **ButtonConfig)
+        button_open_resource = tk.Button(self, text="Відкрити ресурс", **ButtonConfig, command=self.open_resource)
         button_open_resource.grid(row=1, column=0, columnspan=2, padx=10, pady=5)
 
         # Кнопка для повернення
@@ -55,13 +72,17 @@ class User(tk.Frame):
         file_menu.add_command(label="Вийти", command=self.master.quit)
 
         menu_bar.add_cascade(label="Access", menu=file_menu_1)
-        file_menu_1.add_command(label="Перевірити рівень доступу", command=show_access)
+        file_menu_1.add_command(label="Перевірити рівень доступу", command=lambda: show_access(self.credentials_file))
 
         self.master.config(menu=menu_bar)
 
     def open_previous_window(self):
         from main import AuthorizeWindow
         switch_window(self.master, AuthorizeWindow)
+
+    def open_resource(self):
+        """Відкриває нове вікно з ресурсом."""
+        ResourceWindow(self.master)
 
 
 if __name__ == "__main__":

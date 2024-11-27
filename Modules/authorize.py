@@ -12,8 +12,8 @@ def read_credentials(file_path):
     if os.path.exists(file_path):
         with open(file_path, "r", encoding="utf-8") as file:
             for line in file:
-                username, password = line.strip().split(":")
-                credentials[username] = password
+                username, password, _ = line.strip().split(":", 2)
+                credentials[username] = password, _
     else:
         messagebox.showerror("Помилка", f"Файл {file_path} не знайдено!")
     return credentials
@@ -83,10 +83,10 @@ class AuthorizeWindow(tk.Frame):
         admin_credentials = read_credentials(admin_file)
         user_credentials = read_credentials(user_file)
 
-        if username in admin_credentials and admin_credentials[username] == password:
+        if username in admin_credentials and admin_credentials[username][0] == password:
             messagebox.showinfo("Успіх", "Авторизований, як Адміністратор")
             switch_window(self.master, Admin)  # Відкриваємо вікно адміністратора
-        elif username in user_credentials and user_credentials[username] == password:
+        elif username in user_credentials and user_credentials[username][0] == password:
             messagebox.showinfo("Успіх", "Авторизований, як Користувач")
             switch_window(self.master, User)  # Відкриваємо вікно користувача
         else:
