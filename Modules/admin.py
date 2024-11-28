@@ -15,20 +15,10 @@ def show_about():
 
 def show_access(file_path):
     """Відображає рівень доступу поточного користувача."""
-    messagebox.showinfo("Ваш доступ",  f"Рівень: '{check_access_level(file_path)}'")
-
-
-def check_access_level(file_path):
-    """Зчитує дані з файлу та повертає рівні доступу користувачів."""
-    your_level = {}
-    if os.path.exists(file_path):
-        with open(file_path, 'r', encoding="utf_8") as f:
-            for line in f:
-                username, _, access_level = line.strip().split(":", 2)
-                your_level[username] = _, access_level
-    else:
-        messagebox.showerror("Помилка", f"Файл {file_path} не знайдено!")
-    return your_level
+    from Modules.authorize import current_user
+    username = current_user["username"]
+    access_level = current_user["access_level"]
+    messagebox.showinfo("Ваш доступ",  f"Ім'я: {username} Рівень: '{access_level}'")
 
 
 # Клас вікна адміна

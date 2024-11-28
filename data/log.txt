@@ -5,3 +5,53 @@
 [2024-11-28 03:20:08] User: vlad, Action: Авторизація як Користувач
 [2024-11-28 03:20:09] User: User, Action: Ресурс відкрито: data/out.txt
 [2024-11-28 03:52:59] User: admin, Action: Авторизація як Адміністратор
+[2024-11-28 05:10:29] User: admin, Action: Авторизація як Адміністратор
+[2024-11-28 05:10:31] User: admin, Action: Відкрито ресурс для редагування: data/input.txt
+[2024-11-28 05:11:23] User: admin, Action: Відкрито ресурс для редагування: data/input.txt
+[2024-11-28 05:12:14] User: vlad, Action: Авторизація як Користувач
+[2024-11-28 05:13:27] User: vlad, Action: Відкрито розшифрований ресурс для читання: data/out.txt
+[2024-11-28 05:13:47] User: denis, Action: Авторизація як Користувач
+[2024-11-28 05:14:29] User: denis, Action: Відкрито зашифрованний ресурс в силу низького доступу: data/close.txt
+[2024-11-28 05:18:09] User: admin, Action: Авторизація як Адміністратор
+[2024-11-28 05:18:11] User: admin, Action: Відкрито ресурс для редагування: data/input.txt
+[2024-11-28 05:29:20] User: admin, Action: Авторизація як Адміністратор
+[2024-11-28 05:29:21] User: admin, Action: Відкрито ресурс для редагування: data/input.txt
+[2024-11-28 05:35:41] User: admin, Action: Авторизація як Адміністратор
+[2024-11-28 05:35:42] User: admin, Action: Відкрито ресурс для редагування: data/input.txt
+[2024-11-28 05:42:36] User: admin, Action: Авторизація як Адміністратор
+[2024-11-28 05:42:37] User: admin, Action: Відкрито ресурс для редагування: data/input.txt
+[2024-11-28 05:42:40] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:42:41] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:42:41] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:42:47] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:42:48] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:42:58] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:43:10] User: admin, Action: Відкрито ресурс для редагування: data/input.txt
+[2024-11-28 05:45:20] User: admin, Action: Авторизація як Адміністратор
+[2024-11-28 05:45:20] User: admin, Action: Відкрито ресурс для редагування: data/input.txt
+[2024-11-28 05:45:31] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:45:32] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:45:33] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:45:33] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:45:33] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:45:34] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:45:57] User: vlad, Action: Авторизація як Користувач
+[2024-11-28 05:45:58] User: vlad, Action: Файл close.txt розшифрований і збережений в out.txt
+[2024-11-28 05:45:58] User: vlad, Action: Відкрито розшифрований ресурс для читання: data/out.txt
+[2024-11-28 05:49:43] User: admin, Action: Авторизація як Адміністратор
+[2024-11-28 05:49:44] User: admin, Action: Відкрито ресурс для редагування: data/input.txt
+[2024-11-28 05:51:04] User: admin, Action: Авторизація як Адміністратор
+[2024-11-28 05:51:05] User: admin, Action: Відкрито ресурс для редагування: data/input.txt
+[2024-11-28 05:53:06] User: admin, Action: Авторизація як Адміністратор
+[2024-11-28 05:53:08] User: admin, Action: Відкрито ресурс для редагування: data/input.txt
+[2024-11-28 05:53:26] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:53:32] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:53:32] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:53:34] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:53:39] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:53:40] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:53:40] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:53:42] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:53:42] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:53:46] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 05:53:49] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt

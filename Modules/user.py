@@ -3,7 +3,6 @@ from myLib.window import *
 from tkinter import messagebox
 import os
 from Modules.open_resource import ResourceWindow
-from Modules.authorize import current_user
 
 
 def show_about():
@@ -14,6 +13,7 @@ def show_about():
 
 def show_access(file_path):
     """Відображає рівень доступу поточного користувача."""
+    from Modules.authorize import current_user
     username = current_user["username"]
     access_level = current_user["access_level"]
     messagebox.showinfo("Ваш доступ",  f"Ім'я: {username} Рівень: '{access_level}'")
