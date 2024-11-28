@@ -7,14 +7,17 @@ from Modules.user import User
 from Modules.action_log import log_action
 
 
+current_user = {"username": None, "access_level": None}
+
+
 # Функція для зчитування даних(ім'я,пароль) з файлу
 def read_credentials(file_path):
     credentials = {}
     if os.path.exists(file_path):
         with open(file_path, "r", encoding="utf-8") as file:
             for line in file:
-                username, password, _ = line.strip().split(":", 2)
-                credentials[username] = password, _
+                username, password, access_level = line.strip().split(":", 2)
+                credentials[username] = password, access_level
     else:
         messagebox.showerror("Помилка", f"Файл {file_path} не знайдено!")
     return credentials
@@ -73,6 +76,7 @@ class AuthorizeWindow(tk.Frame):
         self.master.config(menu=menu_bar)
 
     def login(self):
+        global current_user  # Глобальна змінна для збереження поточного користувача
         username = self.username_entry.get()
         password = self.password_entry.get()
 
@@ -85,11 +89,15 @@ class AuthorizeWindow(tk.Frame):
         user_credentials = read_credentials(user_file)
 
         if username in admin_credentials and admin_credentials[username][0] == password:
-            messagebox.showinfo("Успіх", "Авторизований, як Адміністратор")
+            access_level_admin = admin_credentials[username][1]
+            messagebox.showinfo("Успіх", f"Авторизований, як Адміністратор! Доступ: {access_level_admin}")
+            current_user = {"username": username, "access_level": access_level_admin}
             log_action(username, "Авторизація як Адміністратор")  # Логування події
             switch_window(self.master, Admin)  # Відкриваємо вікно адміністратора
         elif username in user_credentials and user_credentials[username][0] == password:
-            messagebox.showinfo("Успіх", "Авторизований, як Користувач")
+            access_level_user = user_credentials[username][1]
+            messagebox.showinfo("Успіх", f"Авторизований, як Користувач! Доступ: {access_level_user}")
+            current_user = {"username": username, "access_level": access_level_user}
             log_action(username, "Авторизація як Користувач")  # Логування події
             switch_window(self.master, User)  # Відкриваємо вікно користувача
         else:
