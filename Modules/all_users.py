@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 import os
 from myLib.window import *
+from Modules.action_log import log_action
 
 
 def load_users():
@@ -101,6 +102,8 @@ class UserListWindow(tk.Toplevel):
 
             # Оновлюємо таблицю
             self.tree.delete(selected_item)
+            # Логування події
+            log_action("Admin", f"Користувач '{username_to_delete}' успішно видалений")
 
             # Повідомлення про успішне видалення
             messagebox.showinfo("Успіх", f"Користувача '{username_to_delete}' успішно видалено!")

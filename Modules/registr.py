@@ -3,6 +3,8 @@ from myLib.window import *
 from tkinter import messagebox
 from Modules.admin import Admin
 import os
+from Modules.action_log import log_action
+
 
 def show_about():
     """Виводить інформацію про програму."""
@@ -96,12 +98,14 @@ class Register(tk.Frame):
                 existing_username, _, _ = line.strip().split(":", 2)
                 if username == existing_username:
                     messagebox.showerror("Помилка", f"Користувач '{username}' вже існує!")
+                    log_action("System", f"Помилка при реєстрації: Користувач '{username}' вже існує")  # Логування
                     return
 
         # Додавання нового користувача
         with open(file_path, "a") as f:
             f.write(f"{username}:{password}:{access_level}\n")
         messagebox.showinfo("Успіх", f"Користувача '{username}' успішно зареєстровано!")
+        log_action("System", f"Новий користувач '{username}' успішно зареєстрований")  # Логування
         self.clear_entries()
 
     def clear_entries(self):

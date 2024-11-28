@@ -4,6 +4,7 @@ from tkinter import messagebox
 import os
 from Modules.open_resource import ResourceWindow
 from Modules.all_users import UserListWindow
+from Modules.action_log import show_log_window
 
 
 def show_about():
@@ -62,7 +63,7 @@ class Admin(tk.Frame):
         button_users = tk.Button(self, text="Список користувачів", **ButtonConfig, command=self.open_user_list)
         button_users.grid(row=3, column=0, columnspan=2, padx=10, pady=5)
 
-        button_log = tk.Button(self, text="Переглянути журнал подій", **ButtonConfig)
+        button_log = tk.Button(self, text="Переглянути журнал подій", **ButtonConfig, command=self.show_logs)
         button_log.grid(row=4, column=0, columnspan=2, padx=10, pady=5)
 
         # Кнопка для повернення
@@ -101,6 +102,10 @@ class Admin(tk.Frame):
     def open_user_list(self):
         """Відкриває список користувачів """
         UserListWindow(self.master)
+
+    def show_logs(self):
+        """Відкриває вікно для перегляду журналу подій."""
+        show_log_window(self.master)
 
 
 if __name__ == "__main__":

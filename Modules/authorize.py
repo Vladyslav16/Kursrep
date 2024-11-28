@@ -4,6 +4,7 @@ from tkinter import messagebox
 import os
 from Modules.admin import Admin
 from Modules.user import User
+from Modules.action_log import log_action
 
 
 # Функція для зчитування даних(ім'я,пароль) з файлу
@@ -85,11 +86,14 @@ class AuthorizeWindow(tk.Frame):
 
         if username in admin_credentials and admin_credentials[username][0] == password:
             messagebox.showinfo("Успіх", "Авторизований, як Адміністратор")
+            log_action(username, "Авторизація як Адміністратор")  # Логування події
             switch_window(self.master, Admin)  # Відкриваємо вікно адміністратора
         elif username in user_credentials and user_credentials[username][0] == password:
             messagebox.showinfo("Успіх", "Авторизований, як Користувач")
+            log_action(username, "Авторизація як Користувач")  # Логування події
             switch_window(self.master, User)  # Відкриваємо вікно користувача
         else:
             messagebox.showerror("Помилка", "Неправильне ім'я користувача або пароль.")
+            log_action(username, "Помилкова спроба авторизації")  # Логування невдалої спроби
 
 
