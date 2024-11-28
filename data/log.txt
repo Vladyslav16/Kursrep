@@ -55,3 +55,7 @@
 [2024-11-28 05:53:42] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
 [2024-11-28 05:53:46] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
 [2024-11-28 05:53:49] User: admin, Action: Файл input.txt зашифрованний и збережений в close.txt
+[2024-11-28 06:08:36] User: admin, Action: Авторизація як Адміністратор
+[2024-11-28 06:08:36] User: admin, Action: Відкрито ресурс для редагування: data/input.txt
+[2024-11-28 06:11:09] User: admin, Action: Авторизація як Адміністратор
+[2024-11-28 06:11:11] User: admin, Action: Відкрито ресурс для редагування: data/input.txt

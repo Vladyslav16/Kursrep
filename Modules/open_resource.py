@@ -53,7 +53,8 @@ class ResourceWindow(tk.Toplevel):
 
     def encrypt_input_to_close(self, text):
         """Шифрування тексту input.txt і запис в close.txt."""
-        c1, c2 = encrypt_text(p, g, public_key, text)
+        plaintext_int = text_to_int(text)  # Конвертуємо текст в число
+        c1, c2 = encrypt_text(p, g, public_key, plaintext_int)  # Зашифровка тексту
         with open("data/close.txt", "w", encoding="utf-8") as f:
             f.write(f"{c1}\n{c2}")
         log_action(self.username, "Файл input.txt зашифрованний и збережений в close.txt")
@@ -64,7 +65,8 @@ class ResourceWindow(tk.Toplevel):
             with open("data/close.txt", "r", encoding="utf-8") as f:
                 c1 = int(f.readline().strip())
                 c2 = int(f.readline().strip())
-            plaintext = decrypt_text(p, private_key, c1, c2)
+            plaintext_int = decrypt_text(p, private_key, c1, c2)  # Розшифровка чисел
+            plaintext = int_to_text(plaintext_int)  # Конвертація числа в текст
             with open("data/out.txt", "w", encoding="utf-8") as f:
                 f.write(plaintext)
             log_action(self.username, "Файл close.txt розшифрований і збережений в out.txt")
@@ -75,7 +77,6 @@ class ResourceWindow(tk.Toplevel):
         if file_path == "data/input.txt":
             # Шифруємо текст і записуємо в close.txt
             self.encrypt_input_to_close(content)
-            return
         else:
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write(content)

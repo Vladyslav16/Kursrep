@@ -1,6 +1,20 @@
 import random
 from sympy import isprime
 
+
+
+
+def test_encryption_decryption():
+    original_text = "Это тестовое сообщение."
+    plaintext_int = text_to_int(original_text)
+    c1, c2 = encrypt_text(p, g, public_key, plaintext_int)
+    decrypted_int = decrypt_text(p, private_key, c1, c2)
+    decrypted_text = int_to_text(decrypted_int)
+
+    print("Оригинальный текст:", original_text)
+    print("Зашифрованный текст (c1, c2):", c1, c2)
+    print("Расшифрованный текст:", decrypted_text)
+
 # Генерація простого числа для алгоритму шифрування
 def generate_prime(limit=1000):
     while True:

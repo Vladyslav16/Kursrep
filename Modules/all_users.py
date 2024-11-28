@@ -122,4 +122,3 @@ class UserListWindow(tk.Toplevel):
                     else:
                         f.write(line)
         messagebox.showinfo("Успіх", "Зміни збережено!")
-
